@@ -27,6 +27,7 @@ function anchor_page(limit, offset) {
 }
 
 function get_all_anchors() {
+	console.log("querying " + c.red("anchors"));
 	var l = 20;
 	return anchor_page(l, 0)
 		.then(function(data){
