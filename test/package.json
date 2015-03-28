@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "Simple-Cache": "^1.0.0",
+    "archy": "^1.0.0",
+    "chalk": "^1.0.0",
+    "pretty": "^1.0.0"
+  }
+}
