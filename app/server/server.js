@@ -53,7 +53,8 @@ app.get('/reach', function(conn){
 
 app.use(mach.file, {
 	root: process.cwd() + '/../dist/',
-	index: 'index.html'
+	index: 'index.html',
+	useLastModified: true
 });
 
 mach.serve(app);
