@@ -31,7 +31,7 @@
 //     }
 // });
 
-console.log("L", L);
+var _ = require("lodash");
 
 L.mapbox.accessToken = 'pk.eyJ1Ijoid2lyZXMiLCJhIjoiUk54Vlh5RSJ9.3BVTFfeHzPRbgByezhab8A';
     // .setView([40, -74.50], 3
@@ -64,7 +64,17 @@ function api(resource, params, cb) {
 }
 
 api('/anchors', {}, function(as){
-    console.log(as);
+    as.forEach(function(a) {
+        L.marker([a.latitude, a.longitude], {
+            icon: L.mapbox.marker.icon({
+                'marker-size': 'small',
+                'marker-symbol': 'harbor',
+                'marker-color': '#fa0'
+            })
+        }).addTo(map);
+        
+        console.log(a, a.latitude, a.longitude);
+    });
 });
 
 
