@@ -2,7 +2,6 @@ var mach = require('mach');
 var app = mach.stack();
 var c = require("chalk");
 
-var cache = require("./cache");
 var atlas = require("./atlas");
 
 
@@ -17,7 +16,8 @@ app.use(mach.logger);
 app.use(mach.params);
 
 app.get('/anchors', function(conn){
-	return atlas.anchors()
+	return atlas
+		.anchors()
 		.then(OK(conn));
 });
 
@@ -26,13 +26,15 @@ app.get('/reach', function(conn){
 	if(!q)
 		return 400;
 
-	if(q.match(/\d+\.\d+\.\d+\.\d+\/\d+/)){
+	// ip/prefix ~ v4/v6
+	if(q.match(/[0-9\.\:]+\/\d+/)){
 		var ip = q.split('/')[0]
 		var prefix = q.split('/')[1]
-		console.log("querying prefix " + c.cyan(ip) + "/" + c.red(prefix));
-
-		return atlas.bgp_endpoints(ip + '/' + prefix)
-		.then(OK(conn));
+		console.log("querying prefix " + c.cyan(ip) +
+								"/" + c.red(prefix));
+		return atlas
+			.bgp_endpoints(ip + '/' + prefix)
+			.then(OK(conn));
 	};
 
 	return 400;

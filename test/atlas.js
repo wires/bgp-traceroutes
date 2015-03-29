@@ -122,6 +122,7 @@ exports.bgp_endpoints = function(prefix) {
 						.filter(function(r){
 							return r.probes.length > 0;
 						})
+						/*
 						.map(function(r){
 							return {
 								as: r.as,
@@ -135,8 +136,8 @@ exports.bgp_endpoints = function(prefix) {
 									})
 							}
 						});
+						*/
 
-					console.log(z);
 					return z;
 			});
 		});
