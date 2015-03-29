@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "lodash": "^3.5.0",
+    "lodash": "^3.6.0",
     "react": "^0.12.2",
     "react-router": "^0.12.4",
     "request": "^2.54.0",
