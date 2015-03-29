@@ -15,7 +15,8 @@ function OK(conn){
 function cors(app) {
   return function (conn) {
     return conn.call(app).then(function () {
-      conn.response.setHeader('Access-Control-Allow-Origin', '*');
+		conn.response.setHeader('Access-Control-Allow-Origin', '*');
+		conn.response.setHeader('Access-Control-Allow-Credentials', false);
     });
   };
 }
@@ -48,6 +49,11 @@ app.get('/reach', function(conn){
 	};
 
 	return 400;
+});
+
+app.use(mach.file, {
+	root: process.cwd() + '/../dist/',
+	index: 'index.html'
 });
 
 mach.serve(app);

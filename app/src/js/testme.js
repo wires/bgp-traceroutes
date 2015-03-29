@@ -43,6 +43,30 @@ map.featureLayer.on('click', function(e) {
     map.panTo(e.layer.getLatLng());
 });
 
+var request = require("request")
+
+function api(resource, params, cb) {
+    // alright, let's try it
+    request
+        .get({url: 'http://localhost:5000' + resource, qs: params},
+        function(err, response, body) {
+            console.log(err);
+            if(response.statusCode !== 200 || err)
+            {
+                console.log("error reqn", resource, response.statusCode);
+                return;
+            }
+
+            // {"geoloc":"2711705"}
+            var b = JSON.parse(body);
+            cb(b);
+        });    
+}
+
+api('/anchors', {}, function(as){
+    console.log(as);
+});
+
 
 
 
