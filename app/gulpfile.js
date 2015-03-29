@@ -4,7 +4,7 @@ var $ = require("gulp-load-plugins")();
 
 var build = {
     browserify: require("./src/build/browserify"),
-    devserver: require("./src/build/httpserver")
+    httpserver: require("./src/build/httpserver")
 };
 
 // destination
@@ -15,7 +15,7 @@ var dest = lazypipe()
 
 // bundle and minify the JS
 gulp.task('scripts', function() {
-    return build.browserify('src/js/index.js', 'bundle.js')
+    return build.browserify('src/js/testme.js', 'bundle.js')
         .pipe(dest());
 });
 
@@ -50,7 +50,7 @@ gulp.task('style', function() {
 gulp.task('build', ['copy', 'scripts', 'html', 'style']);
 
 gulp.task('default', ['build'], function(){
-    build.devserver({app_port: 5005});
+    build.httpserver({app_port: 5005});
 
     gulp.watch(['src/html/*.html'], ['html']);
     gulp.watch(['src/style/*.less'], ['style']);

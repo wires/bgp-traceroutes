@@ -14,7 +14,7 @@ livereload.options.debug = true;
 module.exports = function asyncStartHTTP(options) {
 
     // create random port for live-reload server
-    var r = Math.floor(Math.random()*10000) + 30000;
+    var r = 37331;//Math.floor(Math.random()*10000) + 30000;
 
     // defaults
     var opts = _.defaults(options, {

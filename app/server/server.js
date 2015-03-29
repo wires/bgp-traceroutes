@@ -12,6 +12,16 @@ function OK(conn){
 	}
 };
 
+function cors(app) {
+  return function (conn) {
+    return conn.call(app).then(function () {
+      conn.response.setHeader('Access-Control-Allow-Origin', '*');
+    });
+  };
+}
+
+app.use(cors);
+
 app.use(mach.logger);
 app.use(mach.params);
 

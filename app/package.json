@@ -1,0 +1,27 @@
+{
+  "name": "tinker-backoffice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "^3.5.0",
+    "react": "^0.12.2",
+    "react-router": "^0.12.4",
+    "request": "^2.54.0",
+    "rndm": "^1.1.0"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.5.3",
+    "express": "^4.12.3",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-less": "^3.0.2",
+    "gulp-livereload": "^3.8.0",
+    "gulp-load-plugins": "^0.8.1",
+    "gulp-size": "^1.2.1",
+    "gulp-uglify": "^1.1.0",
+    "lazypipe": "^0.2.2",
+    "reactify": "^1.1.0"
+  }
+}
