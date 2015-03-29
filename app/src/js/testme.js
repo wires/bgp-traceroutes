@@ -57,27 +57,64 @@ function api(resource, params, cb) {
                 return;
             }
 
-            // {"geoloc":"2711705"}
             var b = JSON.parse(body);
             cb(b);
         });    
 }
 
-api('/anchors', {}, function(as){
-    as.forEach(function(a) {
-        L.marker([a.latitude, a.longitude], {
+function rndm_color() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+api('/anchors', {}, function(anchors){
+    anchors.forEach(function(a) {
+        var m = L.marker([a.latitude, a.longitude], {
             icon: L.mapbox.marker.icon({
                 'marker-size': 'small',
                 'marker-symbol': 'harbor',
                 'marker-color': '#fa0'
-            })
-        }).addTo(map);
+            }),
+            riseOnHover: true
+        });
         
-        console.log(a, a.latitude, a.longitude);
+        var popupContent = '<p>' +
+            '<b>IPv4</b> <code>' + a.address_v4 + '</code> AS' + a.asn_v4 + '<br/>' +
+            '<b>IPv6</b> <code>' + a.address_v6 + '</code> AS' + a.asn_v6 + '</p>';
+            
+        m.bindPopup(popupContent).openPopup();
+        
+        m.on('click', function(e){
+            console.log("clicked", a);
+            
+            api('/reach', {q: a.prefix_v4}, function(reach){
+                console.log("DONE", reach);
+                
+                reach.forEach(function(as){
+                    var clr = rndm_color();
+                    
+                    as.probes.forEach(function(p){
+                        var k = L.marker([p.latitude, p.longitude], {
+                            icon: L.mapbox.marker.icon({
+                                'marker-size': 'small',
+                                'marker-symbol': (p.is_anchor ? 'harbor' : 'parking'),
+                                'marker-color': clr
+                            }),
+                            riseOnHover: true
+                        });
+                        k.addTo(map);
+                    });
+                });
+            }); 
+        });
+        
+        m.addTo(map);
     });
 });
-
-
 
 
 
